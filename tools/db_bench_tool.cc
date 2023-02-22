@@ -1160,6 +1160,7 @@ DEFINE_int64(
     "will not be logged if the trace file size exceeds this threshold. Default "
     "is 64 GB.");
 DEFINE_string(block_cache_trace_file, "", "Block cache trace file path.");
+DEFINE_string(bench_io_trace_file, "", "FileSystem IO trace file path");
 DEFINE_int32(trace_replay_threads, 1,
              "The number of threads to replay, must >=1.");
 
@@ -3720,6 +3721,28 @@ class Benchmark {
           }
           fprintf(stdout, "Tracing the workload to: [%s]\n",
                   FLAGS_trace_file.c_str());
+        }
+        if (!FLAGS_bench_io_trace_file.empty()) {
+          std::unique_ptr<TraceWriter> io_trace_writer;
+          Status s =
+              NewFileTraceWriter(FLAGS_env, EnvOptions(),
+                                 FLAGS_bench_io_trace_file, &io_trace_writer);
+          if (!s.ok()) {
+            fprintf(stderr,
+                    "Encountered an error when creating trace writer, %s\n",
+                    s.ToString().c_str());
+            ErrorExit();
+          }
+
+          TraceOptions trace_opt;
+          s = db_.db->StartIOTrace(trace_opt, std::move(io_trace_writer));
+          if (!s.ok()) {
+            fprintf(stderr,
+                    "Encountered an error when starting io cache tracing, %s\n",
+                    s.ToString().c_str());
+            ErrorExit();
+          }
+          fprintf(stdout, "Tracing io trace accesses to: [%s]\n", FLAGS_bench_io_trace_file.c_str());
         }
         // Start block cache tracing.
         if (!FLAGS_block_cache_trace_file.empty()) {
