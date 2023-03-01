@@ -1,6 +1,0 @@
-access_count: 1 num: 1706791
-access_count: 2 num: 181052
-access_count: 3 num: 12752
-access_count: 4 num: 665
-access_count: 5 num: 31
-access_count: 6 num: 3
