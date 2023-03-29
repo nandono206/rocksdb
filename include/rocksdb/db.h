@@ -1728,6 +1728,7 @@ class DB {
                            int /*target_level*/) {
     return Status::NotSupported("PromoteL0() is not implemented.");
   }
+  static  Status StartAllTrace(DB** dbptr);
 
   // Trace DB operations. Use EndTrace() to stop tracing.
   virtual Status StartTrace(const TraceOptions& /*options*/,
