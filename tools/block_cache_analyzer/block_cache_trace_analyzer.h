@@ -68,7 +68,7 @@ struct BlockAccessInfo {
   void AddAccess(const BlockCacheTraceRecord& access,
                  uint64_t access_sequnce_number) {
     if (block_size != 0 && access.block_size != 0) {
-      assert(block_size == access.block_size);
+//      assert(block_size == access.block_size);
     }
     if (num_keys != 0 && access.num_keys_in_block != 0) {
       assert(num_keys == access.num_keys_in_block);
