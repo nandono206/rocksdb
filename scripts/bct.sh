@@ -8,7 +8,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-trace_data_dir="./new_trace_data_dir"
+trace_data_dir="../trace_data_dir/workloadc_1million"
 
 
 block_trace_file_path="$trace_data_dir/block_cache_trace_file"
@@ -20,3 +20,4 @@ $bct_path \
  -block_cache_trace_path="/tmp/block_cache_trace_file"\
  -human_readable_trace_file_path="$bct_human_file_path"
 fi
+

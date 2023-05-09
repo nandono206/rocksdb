@@ -1,6 +1,6 @@
 
 trace_analyzer_exec="../cmake-build-debug/trace_analyzer"
-trace_data_dir="./manual_tracing_29032023"
+trace_data_dir="../trace_data_dir/workloadc_1million"
 $trace_analyzer_exec \
   -analyze_get \
   -output_access_count_stats \
